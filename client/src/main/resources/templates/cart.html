@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Panier</title>
+  <style th:inline="css">
+    body {
+      background-color: #f2f2f2;
+      font-family: "Times New Roman";
+    }
+    #product img {
+      max-width: 50%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #4d4d4d;
+      font-size: 3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    #row {
+      width: 60%;
+      margin: 0 auto ;
+      background-color: white;
+      border-radius: 30px;
+      padding : 5%;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    #valider{
+      width : 25%;
+      margin: 0 auto;
+      text-align: center;
+      background-color: #4d4d4d;
+      border-radius: 30px;
+      padding: 10px;
+      margin-top: 2rem;
+    }
+    p {
+      font-size: 1.2rem;
+      margin: 1rem 0;
+      text-align: center;
+      color: #4d4d4d;
+    }
+    a {
+      color: #f2f2f2;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    a:hover {
+      color: #f2f2f2;
+      background-color: #4d4d4d;
+      border-radius: 5px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+<script>
+  function supprimerPanier(){
+    sessionStorage.clear();
+  }
+</script>
+<div class="container">
+  <h1>Panier</h1>
+  <div id="row">
+    <div th:each="item : ${cartItems}" id="product">
+      <img th:src="${item.getIllustration()}">
+      <p th:text= "'ID du produit : ' + ${item.getProductId()} + ', Quantité : ' + ${item.quantity}"></p>
+    </div>
+    <div id="valider">
+      <a th:onclick="|javascript:supprimerPanier()|" th:href="@{|/order/${cart.id}|}">Passer commande</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Microservice Client</title>
+    <style>
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+        #nav a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #nav a:hover {
+            color: #007bff;
+        }
+        #row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+        #row a {
+            text-decoration: none;
+            color: black;
+        }
+        .product-card {
+            width: 400px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .product-card h3 {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function addToCart(id, illustration) {
+        let xhr = new XMLHttpRequest();
+        //at last
+        console.log(illustration)
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    let response = JSON.parse(xhr.responseText);
+                    console.log(response);
+                    sessionStorage.setItem("panierId", response.id);
+                    alert("Article ajouté");
+                    location.reload();
+                } else {
+                    console.log("Error: " + xhr.status);
+                }
+            }
+        };
+        let panierId = sessionStorage.getItem("panierId");
+        let formData = new FormData();
+        formData.append('id', id);
+        formData.append('illustration', illustration);
+        xhr.open("POST", "/product-detail/" + id + "/" + panierId, true);
+        xhr.send(formData);
+    }
+</script>
+
+<div class="container">
+    <div id="nav">
+        <div id="panier" ></div>
+        <div id="commande" ><a th:href="@{|/orders|}">Commande</a></div>
+    </div>
+    <center><h1 th:text= "${product.name}"></h1></center>
+    <div id="row">
+        <div class="product-card">
+            <img th:src="${product.illustration}" class="card-img-top" style="width:400px" />
+            <p th:text= "'Description du produit : ' + ${product.description}"></p>
+            <p th:text= "'Prix : ' + ${product.price} +' €'"></p>
+            <input th:data-illustration="${product.illustration}" th:onclick="|javascript:addToCart('${product.id}', this.getAttribute('data-illustration'))|" type="submit" value="Ajouter au panier" />
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        var historyTraversal = performance.navigation.type === 2;
+        if (historyTraversal) {
+
+            location.reload();
+        }
+    };
+    let navigation = document.getElementById('panier');
+    let panierId = sessionStorage.getItem("panierId");
+
+    if (!panierId) {
+        navigation.innerHTML = "<a>Panier vide</a>";
+    } else {
+        let lienCart = `/cart/${panierId}`;
+        let lienOrder = `/order/${panierId}`;
+        let anchor = document.createElement("a");
+        anchor.href = lienCart;
+        anchor.textContent = "Panier";
+        navigation.appendChild(anchor);
+    }
+
+</script>
+</body>
+</html>

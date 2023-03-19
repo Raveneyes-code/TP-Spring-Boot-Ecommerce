@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Commande</title>
+  <style th:inline="css">
+    html{
+      background-color: #f2f2f2;
+      height:100%;
+    }
+    h1 {
+      text-align: center;
+      color: #4d4d4d;
+      font-size: xx-large;
+      font-family: "Times New Roman";
+    }
+    #row {
+      width: 60%;
+      margin: 0 auto ;
+      background-color: #ffffff;
+      border-radius: 30px;
+      padding : 5%;
+      box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+      margin-top: 50px;
+    }
+    #prix{
+      width : 25%;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 20px;
+      background-color: #4d4d4d;
+      color: #f2f2f2;
+      padding: 10px;
+      border-radius: 20px;
+    }
+    p {
+      color: #4d4d4d;
+      margin-bottom: 10px;
+      font-size: large;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+<body>
+<h1>Commandes passées</h1>
+<div class="container" th:each="order: ${myorders}">
+  <h1 th:text= "'ID commande : ' + ${order.id}"></h1>
+  <div id="row">
+    <div th:each="item : ${order.orderItems}" id="product">
+      <p th:text= "'ID du produit : ' + ${item.productId} + ', Quantité : ' + ${item.quantity} + ', Prix unitaire : ' + ${item.price} "></p>
+    </div>
+    <div id="prix">
+      <h2 th:text= "'Prix total : ' + ${order.price} + ' €'"  ></h2>
+    </div>
+  </div>
+</div>
+</body>
+</html>

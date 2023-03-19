@@ -1,0 +1,7 @@
+INSERT INTO product(id,name, description, illustration, price)values
+(0, 'Asian Crystal-13 shoes', 'Running,Walking & Gym Shoes with Crystal Cushion Technology Lightweight Casual Sneaker Shoes for Men''s & Boy''s','https://i.pinimg.com/originals/3c/87/34/3c8734dac8d91e74f8bda5337d81cc10.png',60.00),
+(1, 'Capuche Truche H06667', 'Cool looking sweater,  made  100% of cotton','https://www.geomix.at/shop/images/0-0-145154.png',53.95),
+(2, 'Allbirds Shoes', 'Men''s Mesh Fabric Fashion Sneakers Casual Oxfords Lightweight Breathable Versatile Walking Shoes','https://cdn.shopify.com/s/files/1/0204/0483/0283/products/AA000YM_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHER_2.0_Natural_Black_Blizzard_0cd04a34-2c27-4ff5-a066-ff0df59dccb6_900x900.png?v=1658160227',34.15),
+(3, 'Puma Essentials Colorblock', '100% Synthetic Imported Rubber sole Shaft measures approximately low-top from arch Casual Athletic Sneaker Smash','https://www.geomix.at/shop/images/0-0-106484.png',42.99),
+(4, 'Blue Vince', 'A smooth leather upper with tonal leather laces gives this minimalist low-top sneaker a polished look that is complemented by a bumper sole','https://cdn.shopify.com/s/files/1/0262/0945/2081/products/AA0030M_SHOE_LEFT_GLOBAL_MENS_WOOL_DASHER2_MIZZLE_NATURAL_BLACK_RUGGED_KHAKI.png?v=1667328657',30.10),
+(5, 'TREFOIL HOODIE Gris', 'La marque Adidas Originals propose cette saison un modèle top confort pour votre plus grand bonheur. Classé incontournable, il fera son effet à coup sûr.','https://photos6.spartoo.com/photos/175/17531648/17531648_500_A.jpg',44.99);
